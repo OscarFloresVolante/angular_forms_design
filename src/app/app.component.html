@@ -1,0 +1,118 @@
+<div class="login-body">
+  <div class="left-side"><div class="cover"></div></div>
+  <div class="right-side">
+    <div class="login-container">
+      <div class="p-4">
+        <h2>Connect your</h2>
+        <h2>Google account</h2>
+
+        <form [formGroup]="loginFormGroup">
+          <div class="row g-2 mt-5">
+            <div class="col">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Full name"
+                  formControlName="name" (keypress)="onlyLetters($event)" required
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="8 chars max length" formControlName="username" required />
+                <div class="text-danger fs-6 fw-lighter" *ngIf="usernameField?.hasError('maxlength') && (usernameField?.touched || usernameField?.dirty)">
+                  8 characters max length
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="col">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="a@example.com" formControlName="email" required />
+                <div class="text-danger fs-6 fw-lighter" *ngIf="emailField?.hasError('email') && (emailField?.touched || emailField?.dirty)">
+                  Wrong email
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="col">
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Only numbers and letters" (keypress)="onlyNumbersAndLetters($event)"  formControlName="passwd1" required/>
+                <div class="text-danger fs-6 fw-lighter" *ngIf="passwd1Field?.hasError('maxlength') && (passwd1Field?.touched || passwd1Field?.dirty)">
+                  8 characters max length
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label"
+                  >Confirm password</label
+                >
+                <input type="password" class="form-control" id="confirm-password" placeholder="Only numbers and letters" (keypress)="onlyNumbersAndLetters($event)"  formControlName="passwd2" required/>
+                <div class="text-danger fs-6 fw-lighter" *ngIf="passwd1Field?.hasError('maxlength') && (passwd1Field?.touched || passwd1Field?.dirty)">
+                  8 characters max length
+                </div>
+                <div class="text-danger fs-6 fw-lighter" *ngIf="loginFormGroup.hasError('error_passwords_match')">
+                  Passwords don't match
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="agreeTerms"
+                name="agreeTerms"
+                formControlName="agreeTerms"
+                required
+              />
+              <label class="form-check-label" for="flexCheckChecked">
+                <div class="terms-of-service">
+                  Creating an account means you're okay wiyth our <span class="links">Terms of
+                  Service, Privacy Policy</span>, and our default <span class="links">Notification
+                  Settings.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="row g-2" *ngIf="!loginFormGroup.valid">
+            <div class="col">
+              <div class="mb-3 text-center text-danger fs-6 fw-lighter">
+                All fields are required
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="col">
+              <div class="mb-3">
+                <button type="button" class="btn btn-primary" style="width: 200px;"
+                  [disabled]="!loginFormGroup.valid"
+                  (click)="createAccount()"
+                >Create account</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="mb-3 privacy-policy">
+              This site is protected by RECAPTCHA and the Google <span class="links">Privacy Policy</span> and <span class="links">Terms of Service</span> apply.
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
